@@ -18,7 +18,7 @@ body {
     scrollbar-width: thin;
 }
 
-.nav{
+.nav {
     display: flex;
     flex-direction: row;
     position: absolute;
@@ -70,6 +70,7 @@ body {
 
 @media (max-width: 768px) {
     .menu li {
+        width: 100%;
         height: 50px;
         margin: 0 5px;
     }
@@ -163,4 +164,25 @@ body {
 
 .page:nth-child(4) {
     color: white;
+}
+
+.type h1 {
+    margin: 0% auto;
+    width: 7em;
+    border-right: 1px solid;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3s steps(7), caret 1s steps(1) infinite;
+}
+
+@keyframes caret {
+    50% {
+        border-color: transparent;
+    }
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
 }
