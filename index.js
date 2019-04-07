@@ -3,27 +3,33 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 3000;
+const router = require('./public/router');
 
+app.use('/', router);
 //透過 /static 路徑字首，來載入 public 目錄中的檔案。
 //ex:http://localhost:3000/static/images/kitten.jpg
 //app.use('/static', express.static('public'));
 app.use('/', express.static('public'));
 
-app.use((req, res, next) =>{
+//this middleware function will be executed for every request to the app.
+app.use((req, res, next) => {
     console.log('Hello MQTT!');
     next();
 });
 
-app.get('/', (req, res) => {
-    //res.send('hello world');
-    res.sendFile('index.html' , { root : __dirname});
-});
+// error handler
+app.use((req, res, next) => {
+    res.status(500).send('HTTP 500 Internal Server Error');
+})
+
+// app.get('/', (req, res) => {
+//     res.sendFile(__dirname + 'index.html');
+// });
 
 const mqtt = require('mqtt')
 const client = mqtt.connect('mqtt://test.mosquitto.org')
-//client.publish("rainbowLedOn", "rainbow")
 
-client.on('connect', function () {
+client.on('connect', () => {
     console.log('MQTT CONNECT!');
     // client.subscribe('test', function (err) {
     //     if (!err) {
@@ -41,36 +47,40 @@ client.on('connect', function () {
 
 
 
-io.on('connection', function (socket) {
-    socket.on('rainbowLedOn',function (msg) {
+io.on('connection', (socket) => {
+    socket.on('rainbowLedOn', (msg) => {
         console.log(msg);
         client.publish("rainbowLedOn", msg.toString());
     });
-    socket.on('gradientLedOn',function (msg) {
+    socket.on('gradientLedOn', (msg) => {
         console.log(msg);
         client.publish("gradientLedOn", msg.toString());
     });
+    socket.on('colorOneLedOn', (msg) => {
+        let leftBracket = msg.indexOf("(");
+        msg = msg.substring(leftBracket);
+        console.log(msg);
+        client.publish("colorOneLedOn", msg.toString());
+    });
+    socket.on('colorTwoLedOn', (msg) => {
+        let leftBracket = msg.indexOf("(");
+        msg = msg.substring(leftBracket);
+        console.log(msg);
+        client.publish("colorTwoLedOn", msg.toString());
+    });
+    socket.on('colorThreeLedOn', (msg) => {
+        let leftBracket = msg.indexOf("(");
+        msg = msg.substring(leftBracket);
+        console.log(msg);
+        client.publish("colorThreeLedOn", msg.toString());
+    });
+
+    socket.on('colorDefault', (msg) => {
+        console.log(msg);
+        client.publish("colorDefault", msg.toString());
+    });
 });
 
-    // socket.on('login', function (name) {
-    //     user.push(name);
-    //     socket.nickname = name;
-    // });
-
-    // socket.on('chat message', function (msg) {
-    //     socket.broadcast.emit('receiveMsg', {
-    //         name: socket.nickname,
-    //         emoteDefault: twitchDefault,
-    //         message: msg.message
-    //     });
-
-    //     socket.emit('receiveMsg', {
-    //         name: socket.nickname,
-    //         emoteDefault: twitchDefault,
-    //         message: msg.message
-    //     });
-    // });
-
-http.listen(PORT, function () {
+http.listen(PORT, () => {
     console.log('listening on http://localhost:3000');
 });
