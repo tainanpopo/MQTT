@@ -32,9 +32,10 @@ $(() => {
         $('.choose-three').css('background-color', "rgb(255, 255, 255)");
         $('.page:nth-child(3)').css('background-image', "rgb(255, 255, 255)");
     };
+
     let colorPicker = new iro.ColorPicker("#color-picker-container", {
         // Set the size of the color picker
-        width: 500,
+        width: 250,
         // Set the initial color to pure red
         color: "#FFFFFF",
         borderWidth: 1,

@@ -4,6 +4,8 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 3000;
 const router = require('./public/router');
+const request = require("request");
+const cheerio = require('cheerio');
 
 app.use('/', router);
 //透過 /static 路徑字首，來載入 public 目錄中的檔案。
@@ -22,9 +24,53 @@ app.use((req, res, next) => {
     res.status(500).send('HTTP 500 Internal Server Error');
 })
 
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + 'index.html');
-// });
+function sleep(second, pttUrl) {
+    return new Promise((resolve, reject) => {
+        let data = []; // save scrapying data.
+        request({
+            url: pttUrl,
+            method: "GET"
+        }, (error, response, body) => {
+            if (error || !body || response.statusCode != 200) {
+                return false;
+            }
+            const $ = cheerio.load(body); // 載入 body
+            $('a').each((i, el) => {
+                let link = $(el).attr('href');
+                let regu = "http[s]?://(i.)?imgur.com/."; // regular expression
+                let re = new RegExp(regu);
+
+                if (re.test(link) == false || link == pttUrl) {
+                    console.log(link, ' Error link...');
+                    if (link == pttUrl) {
+                        return false;
+                    }
+                }
+                else {
+                    data.push(link);
+                }
+            });
+        });
+        setTimeout(() => {
+            resolve(data);
+        }, second);
+    })
+}
+function normalFunc() {
+    console.log('NormalFunc');
+}
+async function awaitDemo(pttUrl) {
+    await normalFunc();
+    console.log('Start scrapying...');
+    try {
+        let result = await sleep(2000, pttUrl);
+        console.log(result);
+        console.log('Scrapying done...');
+        return result;
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 const mqtt = require('mqtt')
 const client = mqtt.connect('mqtt://test.mosquitto.org')
@@ -79,7 +125,21 @@ io.on('connection', (socket) => {
         console.log(msg);
         client.publish("colorDefault", msg.toString());
     });
+
+    socket.on('scraping', (msg) => {
+        console.log(msg);
+        //https://www.ptt.cc/bbs/Beauty/M.1554665148.A.66F.html
+        //https://www.ptt.cc/bbs/Beauty/M.1554658432.A.6EA.html
+        // let pttUrl = "https://www.ptt.cc/bbs/Beauty/M.1554658432.A.6EA.html";
+        // awaitDemo(pttUrl).then(data => {
+        //     socket.emit('receiveMsg', {
+        //         link: data
+        //     });
+        // });
+    });
 });
+
+
 
 http.listen(PORT, () => {
     console.log('listening on http://localhost:3000');

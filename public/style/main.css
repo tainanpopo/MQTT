@@ -20,6 +20,7 @@ body {
 
 .nav {
     display: flex;
+    display: -webkit-flex;
     flex-direction: row;
     position: absolute;
     top: 0;
@@ -27,6 +28,7 @@ body {
     width: 100vw;
     height: 50px;
     background: rgba(0, 0, 0, .5);
+    z-index: 1;
 }
 
 .menu {
@@ -37,7 +39,6 @@ body {
     height: 50px;
     line-height: 50px;
     width: 100%;
-    z-index: 1;
 }
 
 @media (max-width: 768px) {
@@ -135,13 +136,14 @@ body {
 
 .page {
     display: flex;
+    display: -webkit-flex;
     align-items: center;
     justify-content: center;
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
-    /* position: relative; */
+    position: relative;
     color: white;
     font-family: sans-serif;
     font-size: 1em;
@@ -155,7 +157,12 @@ body {
 }
 
 .page:nth-child(2) {
-    color: white;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-content: space-around;
+    overflow-y: scroll;
+    background-color: white;
 }
 
 .page:nth-child(3) {
@@ -164,15 +171,39 @@ body {
 
 .page:nth-child(4) {
     color: white;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.beauty {
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    overflow: auto;
+    scrollbar-color: #808080 white;
+    scrollbar-width: medium;
+    width: calc(240px * 4);
+    height: calc(100% - 100px);
+    margin: auto;
+}
+
+.beauty img {
+    height: 320px;
+    padding-top: 1em;
+    padding-left: 1em;
 }
 
 .type h1 {
     margin: 0% auto;
-    width: 7em;
+    width: 8em;
     border-right: 1px solid;
     overflow: hidden;
     white-space: nowrap;
-    animation: typing 3s steps(7), caret 1s steps(1) infinite;
+    animation: typing 3s steps(8) infinite, caret 1s steps(1) infinite;
 }
 
 @keyframes caret {
@@ -184,5 +215,115 @@ body {
 @keyframes typing {
     from {
         width: 0;
+    }
+}
+
+.page:nth-child(2) .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    visibility: hidden;
+}
+
+.page:nth-child(2) .loading-bar {
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    border-radius: 4px;
+    animation: loading 1s ease-in-out infinite;
+}
+
+.page:nth-child(2) .loading-bar:nth-child(1) {
+    background-color: #3498db;
+    animation-delay: 0;
+}
+
+.page:nth-child(2) .loading-bar:nth-child(2) {
+    background-color: #c0392b;
+    animation-delay: 0.09s;
+}
+
+.page:nth-child(2) .loading-bar:nth-child(3) {
+    background-color: #f1c40f;
+    animation-delay: .18s;
+}
+
+.page:nth-child(2) .loading-bar:nth-child(4) {
+    background-color: #27ae60;
+    animation-delay: .27s;
+}
+
+@keyframes loading {
+    0% {
+        transform: scale(1);
+    }
+    20% {
+        transform: scale(1, 2.2);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+.page:nth-child(4) .barstretch span {
+    display: block;
+    width: 10%;
+    height: 1px;
+    border-radius: 5px;
+    border: 1px solid white;
+    visibility: hidden;
+}
+
+.page:nth-child(4) .barstretch {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.page:nth-child(4) .barstretch:hover span {
+    visibility: visible;
+    -webkit-animation: line 1s linear;
+    /* Safari 4.0 - 8.0 */
+    -webkit-animation-fill-mode: forwards;
+    /* Safari 4.0 - 8.0 */
+    animation: line 1s linear;
+    animation-fill-mode: forwards;
+    /* animation: about 2s linear infinite; */
+}
+
+/* 放大縮小 */
+
+@keyframes line {
+    0% {
+        transform: scaleX(1);
+    }
+    100% {
+        transform: scalex(6);
+    }
+}
+
+.page:nth-child(4) .rotate:hover {
+    animation: about 2s linear infinite;
+}
+
+/* 旋轉 */
+
+@keyframes about {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }

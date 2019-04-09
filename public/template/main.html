@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Practice Web Design</title>
-    <link rel="stylesheet" href="./main.css">
-    <link rel="stylesheet" href="./arduino.css">
+    <link rel="stylesheet" href="./style/main.css">
+    <link rel="stylesheet" href="./style/arduino.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script src="./arduino.js"></script>
+<script src="./js/arduino.js"></script>
+<script src="./js/beauty.js"></script>
 <script src="./iro.min.js"></script>
 
 <body>
@@ -32,10 +33,17 @@
         </div>
         <div class="page-wrap">
             <div class="page" id="home">
-                <div class="type"><h1>welcome</h1></div>
+                <div class="type">
+                    <h1>welcome</h1>
+                </div>
             </div>
             <div class="page" id="beauty">
-                <h1>2</h1>
+                <div class="loading">
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                    <div class="loading-bar"></div>
+                </div>
             </div>
             <div class="page" id="arduino">
                 <div class="content">
@@ -44,10 +52,8 @@
                     </div>
                     <div class="borad-right">
                         <div class="button-group">
-                            <div class="rainbow-btn">
-                                <button id="rainbowBtn">Rainbow</button></div>
-                            <div class="gradient-btn">
-                                <button id="gradientBtn">Gradient</button></div>
+                            <button id="rainbowBtn">Rainbow</button>
+                            <button id="gradientBtn">Gradient</button>
                         </div>
                         <div class="color-choose">
                             <div class="choose-one"></div>
@@ -58,7 +64,13 @@
                 </div>
             </div>
             <div class="page" id="about">
-                <h1>4</h1>
+                <div class="rotate">
+                    <h1>Mouse over the text to rotate.</h1>
+                </div>
+                <div class="barstretch">
+                    <h1>Mouse over the text to stretch bar.</h1>
+                    <span></span>
+                </div>
             </div>
         </div>
     </div>
