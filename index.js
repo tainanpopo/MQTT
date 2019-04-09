@@ -130,12 +130,12 @@ io.on('connection', (socket) => {
         console.log(msg);
         //https://www.ptt.cc/bbs/Beauty/M.1554665148.A.66F.html
         //https://www.ptt.cc/bbs/Beauty/M.1554658432.A.6EA.html
-        // let pttUrl = "https://www.ptt.cc/bbs/Beauty/M.1554658432.A.6EA.html";
-        // awaitDemo(pttUrl).then(data => {
-        //     socket.emit('receiveMsg', {
-        //         link: data
-        //     });
-        // });
+        let pttUrl = "https://www.ptt.cc/bbs/Beauty/M.1554658432.A.6EA.html";
+        awaitDemo(pttUrl).then(data => {
+            socket.emit('receiveMsg', {
+                link: data
+            });
+        });
     });
 });
 
