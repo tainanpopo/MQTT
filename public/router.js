@@ -9,7 +9,7 @@ router.use((req, res, next) => {
 })
 // define the home page route
 router.get('/', (req, res) => {
-    res.sendFile(__dirname + '/template/main.html');
+    res.sendFile(__dirname + '/template/menu.html');
 })
 // define the about route
 router.get('/index', (req, res) => {
