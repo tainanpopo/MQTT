@@ -7,7 +7,7 @@ const router = require('./public/router');
 const request = require("request");
 const cheerio = require('cheerio');
 const Discord = require('discord.js');
-const config = require('./config.json');
+const config = require('config.json');
 const bot = new Discord.Client();
 
 app.use('/', router);
