@@ -151,6 +151,7 @@ bot.on('message', msg => {
         let pttUrl = "https://www.ptt.cc/bbs/Beauty/M.1554658432.A.6EA.html";
         awaitDemo(pttUrl).then(data => {
             let result = data;
+            console.log(Math.floor((Math.random() * 12)));
             msg.reply(result[Math.floor((Math.random() * 12))]);
         });
     }
