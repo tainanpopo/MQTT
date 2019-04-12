@@ -8,7 +8,7 @@ const request = require("request");
 const cheerio = require('cheerio');
 const Discord = require('discord.js');
 const config = require('./config.json');
-const client = new Discord.Client();
+const bot = new Discord.Client();
 
 app.use('/', router);
 //透過 /static 路徑字首，來載入 public 目錄中的檔案。
@@ -142,11 +142,11 @@ io.on('connection', (socket) => {
     });
 });
 
-client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
+bot.on('ready', () => {
+    console.log(`Logged in as ${bot.user.tag}!`);
 });
 
-client.on('message', msg => {
+bot.on('message', msg => {
     if (msg.content === config.prefix + 'beauty') {
         let pttUrl = "https://www.ptt.cc/bbs/Beauty/M.1554658432.A.6EA.html";
         awaitDemo(pttUrl).then(data => {
@@ -156,7 +156,7 @@ client.on('message', msg => {
     }
 });
 
-client.login(config.token);
+bot.login(config.token);
 
 http.listen(PORT, () => {
     console.log('listening on http://localhost:3000');
