@@ -9,6 +9,15 @@ const cheerio = require('cheerio');
 const Discord = require('discord.js');
 const config = require('./public/config.json');
 const bot = new Discord.Client();
+const firebase = require('firebase');
+firebase.initializeApp({
+    apiKey: "AIzaSyD7m_p0sGbNgYG9DClursrnAYcd7q_TFsI",
+    authDomain: "hearthstone-89926.firebaseapp.com",
+    databaseURL: "https://hearthstone-89926.firebaseio.com",
+    projectId: "hearthstone-89926",
+    storageBucket: "hearthstone-89926.appspot.com",
+    messagingSenderId: "34512369905"
+});
 
 app.use('/', router);
 //透過 /static 路徑字首，來載入 public 目錄中的檔案。
@@ -153,6 +162,21 @@ bot.on('message', msg => {
             let result = data;
             console.log(Math.floor((Math.random() * 12)));
             msg.reply(result[Math.floor((Math.random() * 12))]);
+        });
+    }
+    else if (msg.content === config.prefix + 'brm') {
+        //Blackrock Mountain (BRM) 
+        const db = firebase.database();
+        let ref = db.ref("/blackrock-mountain");
+        // ref.once("value", function (snapshot) {
+        //     console.log(snapshot.key);
+        //     console.log(snapshot.val());
+        // });
+
+        ref.once('value').then((data) => {
+            data.forEach((elem) => {
+                msg.reply(elem.val());
+            });
         });
     }
 });

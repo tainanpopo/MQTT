@@ -30,7 +30,7 @@ $(() => {
         $('.choose-one').css('background-color', "rgb(255, 255, 255)");
         $('.choose-two').css('background-color', "rgb(255, 255, 255)");
         $('.choose-three').css('background-color', "rgb(255, 255, 255)");
-        $('.page:nth-child(3)').css('background-image', "rgb(255, 255, 255)");
+        $('.outside').css('background-image', "rgb(255, 255, 255)");
     };
 
     let colorPicker = new iro.ColorPicker("#color-picker-container", {
@@ -46,12 +46,12 @@ $(() => {
     colorPicker.on("input:end", (color) => {
         // Show the current color in different formats
         // Using the selected color: https://iro.js.org/guide.html#selected-color-api
-        $('.page:nth-child(3)').innerHTML = [
+        $('.outside').innerHTML = [
             "hex: " + color.hexString,
             "rgb: " + color.rgbString,
             "hsl: " + color.hslString,
         ].join("<br>");
-        $('.page:nth-child(3)').css('background-color', color.rgbString);
+        $('.outside').css('background-color', color.rgbString);
         nowColor = color.rgbString;
         console.log(nowColor);
         count += 1;
@@ -62,7 +62,7 @@ $(() => {
                 // let leftBracketOne = colorOne.indexOf("(");
                 // let emitColorOne = colorOne.substring(leftBracketOne);
                 $('.choose-one').css('background-color', nowColor);
-                $('.page:nth-child(3)').css('background-image', "linear-gradient( to right," + colorOne + "," + colorTwo + "," + colorThree + ")");
+                $('.outside').css('background-image', "linear-gradient( to right," + colorOne + "," + colorTwo + "," + colorThree + ")");
                 socket.emit('colorOneLedOn', colorOne);
                 break;
             case 1:
@@ -70,7 +70,7 @@ $(() => {
                 // let leftBracketTwo = colorTwo.indexOf("(");
                 // let emitColorTwo = colorTwo.substring(leftBracketTwo);
                 $('.choose-two').css('background-color', nowColor);
-                $('.page:nth-child(3)').css('background-image', "linear-gradient( to right," + colorOne + "," + colorTwo + "," + colorThree + ")");
+                $('.outside').css('background-image', "linear-gradient( to right," + colorOne + "," + colorTwo + "," + colorThree + ")");
                 socket.emit('colorTwoLedOn', colorTwo);
                 break;
             case 2:
@@ -78,7 +78,7 @@ $(() => {
                 // let leftBracketThree = colorThree.indexOf("(");
                 // let emitColorThree = colorThree.substring(leftBracketThree);
                 $('.choose-three').css('background-color', nowColor);
-                $('.page:nth-child(3)').css('background-image', "linear-gradient( to right," + colorOne + "," + colorTwo + "," + colorThree + ")");
+                $('.outside').css('background-image', "linear-gradient( to right," + colorOne + "," + colorTwo + "," + colorThree + ")");
                 socket.emit('colorThreeLedOn', colorThree);
                 break;
             default:

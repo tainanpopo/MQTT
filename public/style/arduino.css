@@ -1,12 +1,25 @@
+.container{
+    overflow: hidden;
+}
+.outside{
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - 50px);
+    margin-top: 50px;
+    background-color: #fff;
+}
+
 .content {
-    width: calc(90% - 80px);
-    height: calc(80% - 80px);
+    position: absolute;
+    width: calc(100% - 80px);
+    height: calc(100% - 100px);
     margin-left: 40px;
     margin-right: 40px;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 50px;
     display: flex;
     display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
     color: #fff;
     background: #00002a;
     border-radius: 20px;

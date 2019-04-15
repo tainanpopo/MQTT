@@ -1,0 +1,78 @@
+.about {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    color: white;
+    font-family: sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .5em;
+}
+
+.barstretch span {
+    display: block;
+    width: 10%;
+    height: 1px;
+    border-radius: 5px;
+    border: 1px solid white;
+    visibility: hidden;
+}
+
+.barstretch {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.barstretch:hover span {
+    visibility: visible;
+    -webkit-animation: line 1s linear;
+    -webkit-animation-fill-mode: forwards;
+    animation: line 1s linear;
+    animation-fill-mode: forwards;
+}
+
+/* 放大縮小 */
+
+@keyframes line {
+    0% {
+        transform: scaleX(1);
+    }
+    100% {
+        transform: scalex(6);
+    }
+}
+
+.rotate:hover {
+    animation: about 2s linear infinite;
+}
+
+/* 旋轉 */
+
+@keyframes about {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

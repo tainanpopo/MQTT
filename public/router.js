@@ -9,11 +9,22 @@ router.use((req, res, next) => {
 })
 // define the home page route
 router.get('/', (req, res) => {
-    res.sendFile(__dirname + '/template/menu.html');
+    res.sendFile(__dirname + '/template/main.html');
 })
+
+// define the beauty route
+router.get('/beauty', (req, res) => {
+    res.sendFile(__dirname + '/template/beauty.html');
+})
+
+// define the arduino route
+router.get('/arduino', (req, res) => {
+    res.sendFile(__dirname + '/template/arduino.html');
+})
+
 // define the about route
-router.get('/index', (req, res) => {
-    res.sendFile(__dirname + '/template/index.html');
+router.get('/about', (req, res) => {
+    res.sendFile(__dirname + '/template/about.html');
 })
 
 module.exports = router;
