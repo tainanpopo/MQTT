@@ -17,14 +17,19 @@ router.get('/beauty', (req, res) => {
     res.sendFile(__dirname + '/template/beauty.html');
 })
 
-// define the test1 route
+// define the gradient background route
 router.get('/background', (req, res) => {
     res.sendFile(__dirname + '/template/background.html');
 })
 
-// define the test2 route
+// define the drop route
 router.get('/drop', (req, res) => {
     res.sendFile(__dirname + '/template/drop.html');
+})
+
+// define the chat route
+router.get('/chat', (req, res) => {
+    res.sendFile(__dirname + '/template/chat.html');
 })
 
 // define the arduino route

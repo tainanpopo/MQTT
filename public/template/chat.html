@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Practice Web Design</title>
+    <link rel="shortcut icon" href="./beauty.png">
+    </link>
+    <link rel="stylesheet" href="./style/menu.css">
+    <link rel="stylesheet" href="./style/chat.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/setEmote.js"></script>
+    <script src="./js/chat.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav">
+            <script src="./js/header.js"></script>
+        </div>
+        <div class="name">
+            <div class="cool">
+                <h5>你好啊</h5>
+            </div>
+            <input type="text" id="name" placeholder="Please enter your nickname." autocomplete="off">
+            <button id="nameBtn">Confirm</button>
+        </div>
+        <div class="gugu2525"></div>
+        <div id="main">
+            <div id="chat">
+                <div id="conversation"></div>
+                <div id="form">
+                    <form action="">
+                        <textarea id="m" placeholder="傳送訊息"></textarea>
+                        <div id="emote"><button id="emoteBtn" type="button"><i class="far fa-smile"></i></button></div>
+                        <!-- <input id="m" autocomplete=" off" /> -->
+                    </form>
+                </div>
+                <div><button id="send" type="button">Send</button></div>
+            </div>
+            <!-- <div id="emoticons">
+                <% items.forEach(function(item) { %>
+                <img src="../static/image/<%= item %>.png" id="<%= item %>">
+                <% }); %>
+                <button id="guguBtn">gugu</button>
+            </div> -->
+        </div>
+    </div>
+</body>
+
+</html>

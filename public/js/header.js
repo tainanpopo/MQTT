@@ -5,6 +5,7 @@ header ='<nav class="menu">\
                 <li class="menu-item"><a href="/beauty">Beauty</a></li>\
                 <li class="menu-item"><a href="/background">Gradient Background</a></li>\
                 <li class="menu-item"><a href="/drop">Drop</a></li>\
+                <li class="menu-item"><a href="/chat">Chat Room</a></li>\
             </ol>\
         </li>\
         <li class="menu-item"><a href="/arduino">Arduino</a></li>\

@@ -8,6 +8,7 @@ const request = require("request");
 const cheerio = require('cheerio');
 const Discord = require('discord.js');
 const config = require('./public/config.json');
+const fs = require('fs');
 const bot = new Discord.Client();
 const firebase = require('firebase');
 firebase.initializeApp({
@@ -18,6 +19,14 @@ firebase.initializeApp({
     storageBucket: "hearthstone-89926.appspot.com",
     messagingSenderId: "34512369905"
 });
+
+// let urlFromMio = [];
+// fs.readFile('mio.txt', (err, data) => {
+//     if (err)throw err;
+//     console.log(data.toString());
+//     urlFromMio.push(data.toString())
+// });
+// console.log(urlFromMio);
 
 app.use('/', router);
 //透過 /static 路徑字首，來載入 public 目錄中的檔案。
@@ -89,23 +98,48 @@ function beautyquery(second) {
     return new Promise((resolve, reject) => {
         let data = []; // save query data.
         const db = firebase.database();
-        db.ref('link/url').once('value', (snapshot) => {
-            // console.log(snapshot.val());
-            data.push(snapshot.val());
-        });
-        // let links = {
-        //     link: {
-        //         url: data
-        //     }
-        // };
+        // db.ref('link/url').once('value', (snapshot) => {
+        //     // console.log(snapshot.val());
+        //     data.push(snapshot.val());
+        // });
+        data = [
+            'https://i.imgur.com/MEzRQda.jpg',
+            'https://i.imgur.com/5fsQukV.jpg',
+            'https://i.imgur.com/e2M1iDi.jpg',
+            'https://i.imgur.com/ylqogef.jpg',
+            'https://i.imgur.com/TqYINa5.jpg',
+            'https://i.imgur.com/9h6Lcpb.jpg',
+            'https://i.imgur.com/NqtI3D1.jpg',
+            'https://i.imgur.com/wVMKfgM.jpg',
+            'https://i.imgur.com/nrQCoOG.jpg',
+            'https://i.imgur.com/BUAY93n.jpg',
+            'https://i.imgur.com/pICIBpm.jpg',
+            'https://i.imgur.com/1vpxBDb.jpg', //12
+            'https://i.imgur.com/KZl5ahh.jpg',
+            'https://i.imgur.com/xIYpJoD.jpg',
+            'https://i.imgur.com/zrrRaw7.jpg',
+            'https://i.imgur.com/2Qc8xCS.jpg',
+            'https://i.imgur.com/A450t7I.jpg',
+            'https://i.imgur.com/g3weJ0a.jpg',
+            'https://i.imgur.com/GPgbTbY.jpg',
+            'https://i.imgur.com/x8WVLxu.jpg',
+            'https://i.imgur.com/fsvh0Q7.jpg',
+            'https://i.imgur.com/3QjYoCO.jpg',
+            'https://i.imgur.com/A23GPQG.jpg']
 
-        // set 是覆蓋
+        let links = {
+            link: {
+                url: data
+            }
+        };
+
         // db.ref().set(links).then(() => {
         //     //讀取todos，查看資料是否有寫入？
         //     db.ref('link/url').once('value', (snapshot) => {
         //         console.log(snapshot.val());
         //     });
         // });
+
         setTimeout(() => {
             resolve(data);
         }, second);
@@ -116,7 +150,6 @@ async function awaitFirebase() {
     console.log('Start query...');
     try {
         let result = await beautyquery(2000);
-        console.log(result);
         console.log('Query done...');
         return result;
     } catch (err) {
@@ -156,9 +189,28 @@ client.on('connect', () => {
 //     client.end()
 // });
 
-
+let twitchDefault =  ['SMOrc', 'FailFish', 'GivePLZ', 'TakeNRG', 'MingLee', 'Kappa', 'KappaPride', 
+    'PogChamp', 'BibleThump', 'BloodTrail', 'HeyGuys', 'LUL', 'ResidentSleeper', 'gugu1Cc', 'gugu1Face', 
+    'gugu11', 'gugu12god', 'gugu18', 'gugu1Angel55', 'gugu1Baka', 'gugu1Annoyed','gugu1Bb', 'gugu1ChuL', 
+    'gugu1ChuR', 'gugu1S2', 'gugu1S', 'gugu1TT', 'gugu1Dance', 'jinnytOMEGALUL', 'jinnytHype', 'jinnytREE']
 
 io.on('connection', (socket) => {
+    socket.on('login', function (name) {
+        socket.nickname = name;
+    });
+    socket.on('chat message', function (msg) {
+        socket.broadcast.emit('receiveMsg', {
+            name: socket.nickname,
+            emoteDefault: twitchDefault,
+            message: msg.message
+        });
+
+        socket.emit('receiveMsg', {
+            name: socket.nickname,
+            emoteDefault: twitchDefault,
+            message: msg.message
+        });
+    });
     socket.on('rainbowLedOn', (msg) => {
         console.log(msg);
         client.publish("rainbowLedOn", msg.toString());
@@ -248,9 +300,11 @@ bot.on('message', msg => {
             let data = [];
             data.push(snapshot.val());
             console.log(data[0].length);
-            console.log(snapshot.val()[Math.floor((Math.random() * data[0].length))]);
+            let number = Math.floor((Math.random() * data[0].length))
+            console.log(number);
+            console.log(snapshot.val()[number]);
             msg.channel.send("\:grinning:");
-            msg.channel.send(snapshot.val()[Math.floor((Math.random() * data[0].length))]);
+            msg.channel.send(snapshot.val()[number]);
         });
     }
 });
