@@ -84,9 +84,62 @@ async function awaitDemo(pttUrl) {
     }
 }
 
-const mqtt = require('mqtt')
-const client = mqtt.connect('mqtt://test.mosquitto.org')
+// https://kanboo.github.io/2017/12/26/Firebase-studynotes/
+function beautyquery(second) {
+    return new Promise((resolve, reject) => {
+        let data = []; // save query data.
+        const db = firebase.database();
+        db.ref('link/url').once('value', (snapshot) => {
+            // console.log(snapshot.val());
+            data.push(snapshot.val());
+        });
+        // let links = {
+        //     link: {
+        //         url: data
+        //     }
+        // };
 
+        // set 是覆蓋
+        // db.ref().set(links).then(() => {
+        //     //讀取todos，查看資料是否有寫入？
+        //     db.ref('link/url').once('value', (snapshot) => {
+        //         console.log(snapshot.val());
+        //     });
+        // });
+        setTimeout(() => {
+            resolve(data);
+        }, second);
+    })
+}
+
+async function awaitFirebase() {
+    console.log('Start query...');
+    try {
+        let result = await beautyquery(2000);
+        console.log(result);
+        console.log('Query done...');
+        return result;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+const mqtt = require('mqtt')
+const options = {
+    port: 10342,
+    host: 'mqtt://m16.cloudmqtt.com',
+    clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8),
+    username: 'dyruunih',
+    password: '-eEcoOkXnOe9',
+    keepalive: 60,
+    reconnectPeriod: 1000,
+    protocolId: 'MQIsdp',
+    protocolVersion: 3,
+    clean: true,
+    encoding: 'utf8'
+};
+
+const client = mqtt.connect('mqtt://m16.cloudmqtt.com', options);
 client.on('connect', () => {
     console.log('MQTT CONNECT!');
     // client.subscribe('test', function (err) {
@@ -114,6 +167,10 @@ io.on('connection', (socket) => {
         console.log(msg);
         client.publish("gradientLedOn", msg.toString());
     });
+    socket.on('cycleLedOn', (msg) => {
+        console.log(msg);
+        client.publish("cycleLedOn", msg.toString());
+    });
     socket.on('colorOneLedOn', (msg) => {
         let leftBracket = msg.indexOf("(");
         msg = msg.substring(leftBracket);
@@ -140,10 +197,16 @@ io.on('connection', (socket) => {
 
     socket.on('scraping', (msg) => {
         console.log(msg);
-        //https://www.ptt.cc/bbs/Beauty/M.1554665148.A.66F.html
-        //https://www.ptt.cc/bbs/Beauty/M.1554658432.A.6EA.html
-        let pttUrl = "https://www.ptt.cc/bbs/Beauty/M.1554658432.A.6EA.html";
-        awaitDemo(pttUrl).then(data => {
+        // ptt beauty closed....改從資料庫撈之前存的圖床
+        // https://www.ptt.cc/bbs/Beauty/M.1554665148.A.66F.html
+        // https://www.ptt.cc/bbs/Beauty/M.1554658432.A.6EA.html
+        // let pttUrl = "https://www.ptt.cc/bbs/Beauty/M.1554658432.A.6EA.html";
+        // awaitDemo(pttUrl).then(data => {
+        //     socket.emit('receiveMsg', {
+        //         link: data
+        //     });
+        // });
+        awaitFirebase().then(data => {
             socket.emit('receiveMsg', {
                 link: data
             });
@@ -157,26 +220,37 @@ bot.on('ready', () => {
 
 bot.on('message', msg => {
     if (msg.content === config.prefix + 'beauty') {
-        let pttUrl = "https://www.ptt.cc/bbs/Beauty/M.1554658432.A.6EA.html";
-        awaitDemo(pttUrl).then(data => {
-            let result = data;
-            console.log(Math.floor((Math.random() * 12)));
-            msg.reply(result[Math.floor((Math.random() * 12))]);
-        });
-    }
-    else if (msg.content === config.prefix + 'brm') {
-        //Blackrock Mountain (BRM) 
-        const db = firebase.database();
-        let ref = db.ref("/blackrock-mountain");
-        // ref.once("value", function (snapshot) {
-        //     console.log(snapshot.key);
-        //     console.log(snapshot.val());
+        // let pttUrl = "https://www.ptt.cc/bbs/Beauty/M.1554658432.A.6EA.html";
+        // awaitDemo(pttUrl).then(data => {
+        //     let result = data;
+        //     console.log(Math.floor((Math.random() * 12)));
+        //     msg.reply(result[Math.floor((Math.random() * 12))]);
         // });
 
-        ref.once('value').then((data) => {
-            data.forEach((elem) => {
-                msg.reply(elem.val());
-            });
+        // write and read
+        // const db = firebase.database();
+        // let links = {
+        //     link: {
+        //         url: data
+        //     }
+        // };
+        // db.ref().set(links).then(() => {
+        //     //讀取todos，查看資料是否有寫入？
+        //     db.ref('link/url').once('value', (snapshot) => {
+        //         console.log(snapshot.val());
+        //     })
+        // })
+
+        // read
+        const db = firebase.database();
+        let myNameRef = db.ref('link/url');
+        myNameRef.once('value', function (snapshot) {
+            let data = [];
+            data.push(snapshot.val());
+            console.log(data[0].length);
+            console.log(snapshot.val()[Math.floor((Math.random() * data[0].length))]);
+            msg.channel.send("\:grinning:");
+            msg.channel.send(snapshot.val()[Math.floor((Math.random() * data[0].length))]);
         });
     }
 });

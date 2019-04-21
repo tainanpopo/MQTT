@@ -26,6 +26,12 @@ $(() => {
         socket.emit('gradientLedOn', 'gradient');
     });
 
+    // Click Gradient Mode.
+    $('#cycleBtn').click(() => {
+        reset();
+        socket.emit('cycleLedOn', 'cycle');
+    });
+
     function reset(){
         $('.choose-one').css('background-color', "rgb(255, 255, 255)");
         $('.choose-two').css('background-color', "rgb(255, 255, 255)");

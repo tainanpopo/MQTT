@@ -17,6 +17,16 @@ router.get('/beauty', (req, res) => {
     res.sendFile(__dirname + '/template/beauty.html');
 })
 
+// define the test1 route
+router.get('/background', (req, res) => {
+    res.sendFile(__dirname + '/template/background.html');
+})
+
+// define the test2 route
+router.get('/drop', (req, res) => {
+    res.sendFile(__dirname + '/template/drop.html');
+})
+
 // define the arduino route
 router.get('/arduino', (req, res) => {
     res.sendFile(__dirname + '/template/arduino.html');
