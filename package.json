@@ -23,6 +23,7 @@
     "express": "^4.16.4",
     "firebase": "^5.9.4",
     "mqtt": "^2.18.8",
+    "python-shell": "^1.0.7",
     "request": "^2.88.0",
     "socket.io": "^2.2.0"
   }

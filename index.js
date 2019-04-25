@@ -28,6 +28,17 @@ firebase.initializeApp({
 // });
 // console.log(urlFromMio);
 
+const ps = require('python-shell')
+const pythonOptions = {
+    pythonOptions: ['-u'],
+    scriptPath: './',
+};
+ps.PythonShell.run('imgurApi.py', pythonOptions, function (err, results) {
+    if (err) throw err;
+    console.log('finished');
+    console.log(results);
+});
+
 app.use('/', router);
 //透過 /static 路徑字首，來載入 public 目錄中的檔案。
 //ex:http://localhost:3000/static/images/kitten.jpg
@@ -189,9 +200,9 @@ client.on('connect', () => {
 //     client.end()
 // });
 
-let twitchDefault =  ['SMOrc', 'FailFish', 'GivePLZ', 'TakeNRG', 'MingLee', 'Kappa', 'KappaPride', 
-    'PogChamp', 'BibleThump', 'BloodTrail', 'HeyGuys', 'LUL', 'ResidentSleeper', 'gugu1Cc', 'gugu1Face', 
-    'gugu11', 'gugu12god', 'gugu18', 'gugu1Angel55', 'gugu1Baka', 'gugu1Annoyed','gugu1Bb', 'gugu1ChuL', 
+let twitchDefault = ['SMOrc', 'FailFish', 'GivePLZ', 'TakeNRG', 'MingLee', 'Kappa', 'KappaPride',
+    'PogChamp', 'BibleThump', 'BloodTrail', 'HeyGuys', 'LUL', 'ResidentSleeper', 'gugu1Cc', 'gugu1Face',
+    'gugu11', 'gugu12god', 'gugu18', 'gugu1Angel55', 'gugu1Baka', 'gugu1Annoyed', 'gugu1Bb', 'gugu1ChuL',
     'gugu1ChuR', 'gugu1S2', 'gugu1S', 'gugu1TT', 'gugu1Dance', 'jinnytOMEGALUL', 'jinnytHype', 'jinnytREE']
 
 io.on('connection', (socket) => {
