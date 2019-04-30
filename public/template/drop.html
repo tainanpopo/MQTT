@@ -9,7 +9,12 @@
     </link>
     <link rel="stylesheet" href="./style/menu.css">
     <link rel="stylesheet" href="./style/drop.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="./dropzone.js"></script>
+    <script src="./js/drop.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 
 <body>
@@ -17,21 +22,23 @@
         <div class="nav">
             <script src="./js/header.js"></script>
         </div>
-        <ul class="drop">
-            <li><a href="#">Menu item</a></li>
-            <li>
-                <a href="#">Menu item</a>
-                <ul class="subdrop">
-                    <li><a href="#">Submenu item</a></li>
-                    <li><a href="#">Submenu item</a></li>
-                    <li><a href="#">Submenu item</a></li>
-                    <li><a href="#">Submenu item</a></li>
-                </ul>
-            </li>
-            <li><a href="">Menu item</a></li>
-            <li><a href="">Menu item</a></li>
-            <li><a href="">Menu item</a></li>
-        </ul>
+        <div class="content">
+            <ul class="drop">
+                <li><a href="#">Menu item</a></li>
+                <li>
+                    <a href="#">Menu item</a>
+                    <ul class="subdrop">
+                        <li><a href="#">Submenu item</a></li>
+                        <li><a href="#">Submenu item</a></li>
+                        <li><a href="#">Submenu item</a></li>
+                        <li><a href="#">Submenu item</a></li>
+                    </ul>
+                </li>
+                <li><a href="">Menu item</a></li>
+                <li><a href="">Menu item</a></li>
+                <li><a href="">Menu item</a></li>
+            </ul>
+        </div>
     </div>
 </body>
 

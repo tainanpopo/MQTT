@@ -12,9 +12,14 @@ $(() => {
     });
 
     function inputName() {
-        $('.name').hide();
-        socket.emit('login', $('#name').val());
-        return false;
+        if($('#name').val() != ''){
+            $('.name').hide();
+            socket.emit('login', $('#name').val());
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     // 傳送訊息

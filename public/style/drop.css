@@ -1,22 +1,38 @@
 /* Mini reset, no margins, paddings or bullets */
-.drop,
-.subdrop {
+
+.container{
+  overflow: hidden;
+}
+
+.content{
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}
+h3{
+  color: #fff;
+  text-align: center;
+}
+
+.drop, .subdrop {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 /* Main level */
-.drop {			
+
+.drop {
   margin: 50px auto;
-  width: 800px;
+  width: 100%;
+  height: 50%;
   /* http://www.red-team-design.com/horizontal-centering-using-css-fit-content-value */
   width: -moz-fit-content;
   width: -webkit-fit-content;
-  width: fit-content;	
+  width: fit-content;
 }
 
-.drop > li {
+.drop>li {
   background: #34495e;
   float: left;
   position: relative;
@@ -30,22 +46,23 @@
   text-decoration: none;
   font-family: Arial, Helvetica;
   font-size: 14px;
-}		
+}
 
 .drop li:hover {
   background: #e74c3c;
-}		
+}
 
-.drop > li > a {
+.drop>li>a {
   transform: skewX(-25deg);
   padding: 1em 2em;
 }
 
 /* Dropdown */
+
 .subdrop {
   position: absolute;
   width: 200px;
-  left: 50%; 
+  left: 50%;
   margin-left: -100px;
   transform: skewX(-25deg);
   transform-origin: left top;
@@ -54,61 +71,62 @@
 .subdrop li {
   background-color: #34495e;
   position: relative;
-  overflow: hidden;		
-}						
-
-.subdrop > li > a {
-  padding: 1em 2em;			
+  overflow: hidden;
 }
 
-.subdrop > li::after {
+.subdrop>li>a {
+  padding: 1em 2em;
+}
+
+.subdrop>li::after {
   content: '';
   position: absolute;
   top: -125%;
   height: 100%;
-  width: 100%;			
-  box-shadow: 0 0 50px rgba(0, 0, 0, .9);			
-}		
+  width: 100%;
+  box-shadow: 0 0 50px rgba(0, 0, 0, .9);
+}
 
 /* Odd stuff */
-.subdrop > li:nth-child(odd){
+
+.subdrop>li:nth-child(odd) {
   transform: skewX(-25deg) translateX(0);
 }
 
-.subdrop > li:nth-child(odd) > a {
+.subdrop>li:nth-child(odd)>a {
   transform: skewX(25deg);
-}			
+}
 
 /* Even stuff */
-.subdrop > li:nth-child(even){
+
+.subdrop>li:nth-child(even) {
   transform: skewX(25deg) translateX(0);
 }
 
-.subdrop > li:nth-child(even) > a {
+.subdrop>li:nth-child(even)>a {
   transform: skewX(-25deg);
 }
 
 /* Show dropdown */
-.subdrop,
-.subdrop li {
+
+.subdrop, .subdrop li {
   opacity: 0;
-  visibility: hidden;			
+  visibility: hidden;
 }
 
 .subdrop li {
   transition: .2s ease transform;
 }
 
-.drop > li:hover .subdrop,
-.drop > li:hover .subdrop li {
+.drop>li:hover .subdrop, .drop>li:hover .subdrop li {
   opacity: 1;
   visibility: visible;
-}		
-
-.drop > li:hover .subdrop li:nth-child(even){
-  transform: skewX(25deg) translateX(15px);			
 }
 
-.drop > li:hover .subdrop li:nth-child(odd){
-  transform: skewX(-25deg) translateX(-15px);			
+.drop>li:hover .subdrop li:nth-child(even) {
+  transform: skewX(25deg) translateX(15px);
+}
+
+.drop>li:hover .subdrop li:nth-child(odd) {
+  transform: skewX(-25deg) translateX(-15px);
 }

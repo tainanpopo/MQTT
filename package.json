@@ -22,6 +22,7 @@
     "discord.js": "^11.4.2",
     "express": "^4.16.4",
     "firebase": "^5.9.4",
+    "formidable": "^1.2.1",
     "mqtt": "^2.18.8",
     "python-shell": "^1.0.7",
     "request": "^2.88.0",
