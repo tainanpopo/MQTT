@@ -230,9 +230,13 @@ io.on('connection', (socket) => {
         console.log(msg);
         client.publish("gradientLedOn", msg.toString());
     });
-    socket.on('cycleLedOn', (msg) => {
+    socket.on('ledOn', (msg) => {
         console.log(msg);
-        client.publish("cycleLedOn", msg.toString());
+        client.publish("ledOn", msg.toString());
+    });
+    socket.on('ledOff', (msg) => {
+        console.log(msg);
+        client.publish("ledOff", msg.toString());
     });
     socket.on('colorOneLedOn', (msg) => {
         let leftBracket = msg.indexOf("(");
