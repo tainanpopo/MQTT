@@ -200,7 +200,7 @@ input:checked+.slider:before {
 }
 
 @media (max-width: 768px) {
-    .choose-one, .choose-two .choose-three{
+    .choose-one, .choose-two , .choose-three{
         width: 40px;
         height: 40px;
     }
