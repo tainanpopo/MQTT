@@ -279,6 +279,15 @@ io.on('connection', (socket) => {
             });
         });
     });
+
+    socket.on('staticBtn', (msg) => {
+        console.log(msg);
+    });
+
+    socket.on('cycleBtn', (msg) => {
+        console.log(msg);
+        client.publish("cycle", msg.toString());
+    });
 });
 
 bot.on('ready', () => {

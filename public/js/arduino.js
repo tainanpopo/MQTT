@@ -5,6 +5,7 @@ $(() => {
     let colorTwo;
     let colorThree;
     let count = -1;
+    let colorPicker;
 
     // Setup F5 Event.
     if ($('.choose-one').css("background-color") == "rgb(255, 255, 255)" &&
@@ -24,9 +25,9 @@ $(() => {
         else{
             $('#led').css("background-color", "white");
             console.log("false");
-            socket.emit('ledOff', 'false');
             reset();
             count = -1;
+            socket.emit('ledOff', 'false');
         }
     });
 
@@ -42,22 +43,6 @@ $(() => {
         socket.emit('gradientLedOn', 'gradient');
     });
 
-    function reset(){
-        $('.choose-one').css('background-color', "rgb(255, 255, 255)");
-        $('.choose-two').css('background-color', "rgb(255, 255, 255)");
-        $('.choose-three').css('background-color', "rgb(255, 255, 255)");
-        $('.outside').css('background-image', "linear-gradient( to right, rgb(255, 255, 255) , rgb(255, 255, 255) , rgb(255, 255, 255)");
-    };
-
-    let colorPicker = new iro.ColorPicker("#color-picker-container", {
-        // Set the size of the color picker
-        width: 250,
-        // Set the initial color to pure red
-        color: "#FFFFFF",
-        borderWidth: 1,
-        borderColor: "#fff",
-    });
-
     // https://iro.js.org/guide.html#color-picker-events
     colorPicker.on("input:end", (color) => {
         // Show the current color in different formats
@@ -67,7 +52,7 @@ $(() => {
             "rgb: " + color.rgbString,
             "hsl: " + color.hslString,
         ].join("<br>");
-        $('.outside').css('background-color', color.rgbString);
+        //$('.outside').css('background-color', color.rgbString);
         nowColor = color.rgbString;
         console.log(nowColor);
         count += 1;
@@ -75,24 +60,18 @@ $(() => {
         switch (count) {
             case 0:
                 colorOne = nowColor;
-                // let leftBracketOne = colorOne.indexOf("(");
-                // let emitColorOne = colorOne.substring(leftBracketOne);
                 $('.choose-one').css('background-color', nowColor);
                 $('.outside').css('background-image', "linear-gradient( to right," + colorOne + "," + colorTwo + "," + colorThree + ")");
                 socket.emit('colorOneLedOn', colorOne);
                 break;
             case 1:
                 colorTwo = nowColor;
-                // let leftBracketTwo = colorTwo.indexOf("(");
-                // let emitColorTwo = colorTwo.substring(leftBracketTwo);
                 $('.choose-two').css('background-color', nowColor);
                 $('.outside').css('background-image', "linear-gradient( to right," + colorOne + "," + colorTwo + "," + colorThree + ")");
                 socket.emit('colorTwoLedOn', colorTwo);
                 break;
             case 2:
                 colorThree = nowColor;
-                // let leftBracketThree = colorThree.indexOf("(");
-                // let emitColorThree = colorThree.substring(leftBracketThree);
                 $('.choose-three').css('background-color', nowColor);
                 $('.outside').css('background-image', "linear-gradient( to right," + colorOne + "," + colorTwo + "," + colorThree + ")");
                 socket.emit('colorThreeLedOn', colorThree);
@@ -106,5 +85,34 @@ $(() => {
             console.log(colorThree);
             count = -1;
         }
+    });
+
+    function reset(){
+        console.log('reset');
+        $('.choose-one').css('background-color', "rgb(255, 255, 255)");
+        $('.choose-two').css('background-color', "rgb(255, 255, 255)");
+        $('.choose-three').css('background-color', "rgb(255, 255, 255)");
+        $('.outside').css('background-image', "linear-gradient( to right, rgb(255, 255, 255) , rgb(255, 255, 255) , rgb(255, 255, 255)");
+        colorOne = '';
+        colorTwo = '';
+        colorThree = '';
+        if(colorPicker == null){
+            colorPicker = new iro.ColorPicker("#color-picker-container", {
+                // Set the size of the color picker
+                width: 250,
+                // Set the initial color to pure white
+                color: nowColor,
+                borderWidth: 1,
+                borderColor: "#fff",
+            });
+        }
+    };
+
+    $('#static').click(() => {
+        socket.emit('staticBtn', 'static');
+    });
+
+    $('#cycle').click(() => {
+        socket.emit('cycleBtn', 'cycle');
     });
 });
