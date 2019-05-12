@@ -115,4 +115,8 @@ $(() => {
     $('#cycle').click(() => {
         socket.emit('cycleBtn', 'cycle');
     });
+
+    $('#music').click(() => {
+        socket.emit('musicBtn', 'music');
+    });
 });

@@ -288,6 +288,11 @@ io.on('connection', (socket) => {
         console.log(msg);
         client.publish("cycle", msg.toString());
     });
+
+    socket.on('musicBtn', (msg) => {
+        console.log(msg);
+        client.publish("cycle", msg.toString());
+    });
 });
 
 bot.on('ready', () => {
