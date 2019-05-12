@@ -123,6 +123,7 @@
 
 .subdrop>li>a {
     padding: 1em 2em;
+    text-align: center;
 }
 
 .subdrop>li::after {
