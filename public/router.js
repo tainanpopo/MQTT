@@ -42,4 +42,9 @@ router.get('/about', (req, res) => {
     res.sendFile(__dirname + '/template/about.html');
 })
 
+// define the parallax route
+router.get('/parallax', (req, res) => {
+    res.sendFile(__dirname + '/template/parallax_demo.html');
+})
+
 module.exports = router;

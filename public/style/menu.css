@@ -9,7 +9,7 @@ html, body .container{
     height: 100vh;
     font-size: 18px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: url(https://i.imgur.com/ona9ubI.jpg) no-repeat center center fixed;
+    /* background: url(https://i.imgur.com/ona9ubI.jpg) no-repeat center center fixed; */
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -132,6 +132,11 @@ a {
 .sub-menu .menu-item:nth-child(4) {
     animation-duration: 0.5s;
     animation-delay: 0.3s;
+}
+
+.sub-menu .menu-item:nth-child(5) {
+    animation-duration: 0.6s;
+    animation-delay: 0.4s;
 }
 
 @keyframes enter {
