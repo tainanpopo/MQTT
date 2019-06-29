@@ -21,12 +21,12 @@ body, html {
 
 .bgimg-2 {
     background-image: url("https://i.imgur.com/j2msXEg.jpg");
-    min-height: 400px;
+    min-height: 500px;
 }
 
 .bgimg-3 {
     background-image: url("https://i.imgur.com/fc1v9B4.jpg");
-    min-height: 400px;
+    min-height: 500px;
 }
 
 .caption {
