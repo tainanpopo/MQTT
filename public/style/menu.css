@@ -139,6 +139,12 @@ a {
     animation-delay: 0.4s;
 }
 
+.sub-menu .menu-item:nth-child(6) {
+    animation-duration: 0.7s;
+    animation-delay: 0.5s;
+}
+
+
 @keyframes enter {
     from {
         opacity: 0;

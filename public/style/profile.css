@@ -1,0 +1,49 @@
+.profile{
+    font-family:メイリオ,meiryo,ヒラギノ角ゴ pro w3,hiragino kaku gothic pro,sans-serif;
+    background:white;
+}
+.content {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+img{
+    margin: 60px;
+}
+
+.line{
+    margin-top: 10px;
+    width: 200px;
+    border-top: 1px solid black;
+}
+
+.shiyoukai{
+    margin: 0;
+    padding: 0;
+    width: 70%;
+    height: 200px;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.shiyoukai div{
+    width: calc(70%-100px);
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.ballin{
+    width: 100px;
+}
