@@ -1,10 +1,6 @@
 .profile{
     font-family:メイリオ,meiryo,ヒラギノ角ゴ pro w3,hiragino kaku gothic pro,sans-serif;
-    background:white center center fixed;
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
+    background:white;
 }
 .content {
     background: url(https://i.imgur.com/1J8fpIo.png) center center fixed;
