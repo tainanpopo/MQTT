@@ -34,7 +34,7 @@ img {
     justify-content: center;
 }
 
-.shiyoukai .nihongo {
+.shiyoukai .eigo {
     flex-basis: 342px;
     display: flex;
     display: -webkit-flex;
@@ -67,33 +67,9 @@ img {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    visibility: hidden;
 }
 
 .button {
-    display: block;
-    color: white;
-    min-height: 21px;
-    width: 56px;
-    margin: 10%;
-    font: normal normal normal 15px/1.4em 'ｍｓ ゴシック', 'ms gothic', 'ヒラギノ角ゴ pro w3', 'hiragino kaku gothic pro', osaka, sans-serif;
-    border-radius: 5px;
-    background-color: rgba(235, 171, 190, 1);
-    border: solid rgba(65, 65, 65, 1) 0px;
-    box-shadow: 1px 1px #75565F, 3px 3px #75565F, 5px 5px #75565F, 7px 7px #75565F, 9px 9px #75565F;
-    transition: all 0.5s ease 0s;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-}
-
-.button:hover {
-    display: block;
-    background-color: rgba(64, 87, 110, 1);
-    border-color: transparent;
-    bottom: -9px;
-    box-shadow: 0 0 #712A5A;
-    left: 9px;
-    right: -9px;
-    top: 9px;
-    text-align: center;
+    visibility: hidden;
 }

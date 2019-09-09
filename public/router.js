@@ -51,4 +51,14 @@ router.get('/parallax', (req, res) => {
 router.get('/profile', (req, res) => {
     res.sendFile(__dirname + '/template/profile.html');
 })
+
+// define the profile-1 route
+router.get('/profile_tw', (req, res) => {
+    res.sendFile(__dirname + '/template/profile_tw.html');
+})
+
+// define the profile route
+router.get('/profile_en', (req, res) => {
+    res.sendFile(__dirname + '/template/profile_en.html');
+})
 module.exports = router;
