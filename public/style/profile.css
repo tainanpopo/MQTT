@@ -10,6 +10,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    animation: fadeIn ease 5s;
+    -webkit-animation: fadeIn ease 5s;
+    -moz-animation: fadeIn ease 5s;
+    -o-animation: fadeIn ease 5s;
+    -ms-animation: fadeIn ease 5s;
 }
 
 img {
@@ -35,7 +40,25 @@ img {
 }
 
 .shiyoukai .nihongo {
-    flex-basis: 342px;
+    flex-basis: calc(70%-100px);
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.shiyoukai .taiwango {
+    flex-basis: calc(70%-100px);
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.shiyoukai .eigo {
+    flex-basis: calc(70%-100px);
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
@@ -96,4 +119,49 @@ img {
     right: -9px;
     top: 9px;
     text-align: center;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
